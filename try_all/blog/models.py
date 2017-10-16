@@ -23,7 +23,7 @@ class Post(models.Model):
     def hide(self):
         "게시글을 미발행상태로 만듦"
         self.published_date = None
-        self.save() 
+        self.save()
 
 
 
