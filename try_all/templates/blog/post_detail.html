@@ -14,6 +14,11 @@
     <br>
     <hr>
     <p>{{post.content|linebreaksbr}}</p>
+
+    <form action="{% url 'post_delete' post_id=post.pk %}" method="post">
+        {% csrf_token %}
+		<button class="btn btn-danger">글 삭제</button>
+	</form>
 </div>
 
 {% endblock %}

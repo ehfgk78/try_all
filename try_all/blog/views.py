@@ -55,7 +55,8 @@ def post_add(request):
         content = request.POST.get('content')
         is_publish = bool(request.POST.get('is_publish'))
         author = User.objects.get(username='learn')
-        # title & content ---> Post 생성
+
+        # title & content 모두 작성할 때에만 Post 생성
         if title and content:
             post = Post.objects.create(
                 author=author,
@@ -76,8 +77,16 @@ def post_add(request):
             'title': title,
             'content': content,
         }
-    # POST방식이 아니었다면,
     else:
         context = {}
     return render(request, 'blog/post_add.html', context)
 
+def post_delete(request, post_id):
+    # post_detail.html에서 글 삭제 버튼 추가
+    # 삭제하면 해당 post를 DB에서 삭제하고
+    # post_list.html로 이동
+    if request.method == 'POST':
+        post = Post.objects.get(pk=post_id)
+        post.delete()
+        return redirect('post_list')
+    return HttpResponse('삭제가 거부되었습니다.', status=403)
