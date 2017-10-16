@@ -9,24 +9,35 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import json
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# ~/projects/django/djangoTryAll/try_all
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+####### 장고 key와 DB pw 등을 배포와 git으로부터 노출되지 않게 하기 ################
+# 4. .gitignore에 .config_secret/ 폴더를 추가
+# 목적:  djangoTryAll/.config_secret/settings_common.json에 접근하기
+ROOT_DIR = os.path.dirname(BASE_DIR)
+SETTINGS_COMMON_JSON = os.path.join(os.path.join(ROOT_DIR, '.config_secret'), 'settings_common.json')
 
+with open(SETTINGS_COMMON_JSON) as f:
+    settings_common_json = f.read()
+settings_common_dict = json.loads(settings_common_json)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'n+8kk8&-^bwls2boi&t$)eysmons5*x6-j_6o^gvi4vh+n$p@5'
+SECRET_KEY = settings_common_dict["django"]["secret_key"]
+
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    '*',
+]
 
 # Application definition
 
@@ -49,7 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'try_all.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -67,19 +78,17 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'try_all.wsgi.application'
-
+WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+DATABASES = settings_common_dict['django']['databases']
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -99,20 +108,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
