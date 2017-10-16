@@ -34,7 +34,9 @@ STATIC_URL = '/static/'
 # 정적파일을 저장할 'static'폴더
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # Django에서 정적파일을 검색하고 가져올 폴더 목록
-STATICFILES_DIR = [ STATIC_DIR, ]
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
