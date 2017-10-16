@@ -16,12 +16,12 @@ class Post(models.Model):
         return self.title
 
     def publish(self):
-        "게시글을 발행상태로 만듦"
+        "게시글을 발행상태로 "
         self.published_date = timezone.now()
         self.save()
 
     def hide(self):
-        "게시글을 미발행상태로 만듦"
+        "게시글을 미발행상태로 "
         self.published_date = None
         self.save()
 

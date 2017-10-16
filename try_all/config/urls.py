@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from blog.views import post_list, post_detail
+from blog.views import post_list, post_detail, post_add
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,6 +25,8 @@ urlpatterns = [
     # post_id <== 장고템플릿 : name으로  views.post_detail을 인식함
     # post <-- context <-- posts <-- views.post_list <== models.Post
     url(r'^posts/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
+
+    url(r'^posts/add/$', post_add, name='post_add'),
 ]
 
 
