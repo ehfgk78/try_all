@@ -11,7 +11,10 @@ def post_list(request):
     #2. published_date이 표시된 것만 보여주기
     # posts = Post.objects.filter(published_date__isnull=False)
     #3. published_date 순으로 보여주기
-    posts = Post.objects.filter(published_date__isnull=False).order_by('published_date')
+    # posts = Post.objects.filter(published_date__isnull=False).order_by('published_date')
+    #4. 최신 게시물부터 보여주기
+    posts = Post.objects.filter(published_date__isnull=False)\
+        .order_by('-published_date')
     context = {
         'posts': posts,
     }

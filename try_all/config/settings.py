@@ -28,8 +28,13 @@ settings_common_dict = json.loads(settings_common_json)
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings_common_dict["django"]["secret_key"]
-
+# 템플릿파일을 저장할 'templates'폴더
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_URL = '/static/'
+# 정적파일을 저장할 'static'폴더
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# Django에서 정적파일을 검색하고 가져올 폴더 목록
+STATICFILES_DIR = [ STATIC_DIR, ]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -49,6 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd-party applications
+    'django_extensions',
+
+    # User applications
     'blog',
 ]
 
@@ -128,4 +137,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+
