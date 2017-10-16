@@ -21,3 +21,14 @@ def post_list(request):
     # view > url > 브라우저 랜더링 : 잘 동작하는지 확인
     # return HttpResponse("<h1> start view !!!</h1>")
     return render(request, 'blog/post_list.html', context)
+
+
+def post_detail(request, post_id):
+    # <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+    # post_list.html 부분 중 위 a태그를 클릭하면 해당 post가 나타나도록 설계
+    ## post.pk <-- 장고 Model Post <== 장고 ORM <<< DB기본키(Primary Key)
+    ## post_id <--(views, 템플릿)- urls.py
+    context = {
+        'post' : Post.objects.get(pk=post_id)
+    }
+    return render(request, 'blog/post_detail.html', context)
