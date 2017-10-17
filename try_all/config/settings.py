@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
     # User applications
     'blog',
+    'polls',
 ]
 
 MIDDLEWARE = [
