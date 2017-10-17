@@ -1,0 +1,15 @@
+
+
+<h1>{{ question.title }}</h1>
+<hr>
+
+<form action="{% url 'poll_vote'  poll_id=question.pk %}"   method="POST">
+    {% csrf_token %}
+   {% for  choice  in question.choice_set.all %}
+    <label for="check">{{ choice.title }}</label>
+    <input  name="choice_pk" value="choice.pk"  type="radio" id="check" >
+    <br>
+    {% endfor %}
+    <hr>
+    <button class="btn btn-primary btn-block">투표 마치기 </button>
+</form>

@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from blog.views import post_list, post_detail, post_add, post_delete
-from polls.views import index
+from polls.views import poll_index
 
 urlpatterns = [
     ### blog ###
@@ -30,7 +30,10 @@ urlpatterns = [
     url(r'^posts/(?P<post_id>\d+)/delete/$', post_delete, name='post_delete'),
 
     ### polls ###
-    url(r'^polls/$', index)
+    url(r'^polls/$', poll_index, name='poll_index'),
+    # url(r'^polls/(?P<question_id>\d+)/$', poll_detail, name='poll_detail'),
+    # url(r'^polls/(?P<question_id>\d+)/result/$', poll_result, name='poll_result'),
+    # url(r'^polls/(?P<question_id>\d+)/vote/$', poll_vote, name='poll_vote'),
 ]
 
 
