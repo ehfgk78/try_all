@@ -2,12 +2,15 @@
 
 <h1>{{ question.title }}</h1>
 <hr>
+{% if error_message %}
+{{ error_message  }}
+{% endif %}
 
-<form action="{% url 'poll_vote'  poll_id=question.pk %}"   method="POST">
+<form action="{% url 'poll_vote' question_id=question.pk %}"   method="POST">
     {% csrf_token %}
    {% for  choice  in question.choice_set.all %}
+    <input  name="choice_pk" value="{{ choice.pk }}"  type="radio" id="check" >
     <label for="check">{{ choice.title }}</label>
-    <input  name="choice_pk" value="choice.pk"  type="radio" id="check" >
     <br>
     {% endfor %}
     <hr>

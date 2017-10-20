@@ -17,31 +17,20 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from blog.views import post_list, post_detail, post_add, post_delete
-from polls.views import poll_index
+from polls.views import poll_index, poll_detail, poll_vote, poll_result
 
 urlpatterns = [
-    ### blog ###
     url(r'^admin/', admin.site.urls),
+     ### blog ###
     url(r'^$', post_list, name='post_list'),
-    # post_id <== 장고템플릿 : name으로  views.post_detail을 인식함
-    # post <-- context <-- posts <-- views.post_list <== models.Post
     url(r'^posts/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
     url(r'^posts/add/$', post_add, name='post_add'),
     url(r'^posts/(?P<post_id>\d+)/delete/$', post_delete, name='post_delete'),
 
     ### polls ###
     url(r'^polls/$', poll_index, name='poll_index'),
-    # url(r'^polls/(?P<question_id>\d+)/$', poll_detail, name='poll_detail'),
-    # url(r'^polls/(?P<question_id>\d+)/result/$', poll_result, name='poll_result'),
-    # url(r'^polls/(?P<question_id>\d+)/vote/$', poll_vote, name='poll_vote'),
+    url(r'^polls/(?P<question_id>\d+)/$', poll_detail, name='poll_detail'),
+    url(r'^polls/(?P<question_id>\d+)/vote/$', poll_vote, name='poll_vote'),
+    url(r'^polls/(?P<question_id>\d+)/result/$', poll_result, name='poll_result'),
+
 ]
-
-
-
-
-
-
-
-
-
-
