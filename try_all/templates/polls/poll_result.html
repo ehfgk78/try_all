@@ -7,5 +7,5 @@
     </li>
     {% endfor %}
 </ul>
-<a href="{% url 'poll_detail' question_id=question.pk %}"><h3>다시 투표하기</h3></a>
+<a href="{% url 'polls:poll_detail' question_id=question.pk %}"><h3>다시 투표하기</h3></a>
 <a href="/polls/"><h3>홈으로</h3></a>

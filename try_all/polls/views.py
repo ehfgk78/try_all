@@ -17,14 +17,14 @@ def poll_index(request):
 
 
 def poll_detail(request, question_id):
-    return HttpResponse("It's detail page")
+    # return HttpResponse("It's detail page")
     # try:
     #     selected_title = Question.objects.get(pk=question_id)
     # except Question.DoesNotExist:
     #     raise Http404("Question does not exist")
     selected_title = get_object_or_404(Question, pk=question_id)
     context = {
-        'question': selected_title
+        'question': selected_title,
     }
     return render(request, 'polls/poll_detail.html', context)
 
@@ -56,7 +56,7 @@ def poll_vote(request, question_id):
                 'error_message': "다시 선택을 하세요~"
             }
             return render(request, 'polls/poll_detail.html', context)
-        return redirect('poll_result', question_id=question.pk)
+        return redirect('polls:poll_result', question_id=question.pk)
     else:
         return HttpResponse(
             """

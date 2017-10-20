@@ -13,24 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from blog.views import post_list, post_detail, post_add, post_delete
 from polls.views import poll_index, poll_detail, poll_vote, poll_result
 
 urlpatterns = [
+    ### admin ###
     url(r'^admin/', admin.site.urls),
      ### blog ###
-    url(r'^$', post_list, name='post_list'),
-    url(r'^posts/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
-    url(r'^posts/add/$', post_add, name='post_add'),
-    url(r'^posts/(?P<post_id>\d+)/delete/$', post_delete, name='post_delete'),
-
-    ### polls ###
-    url(r'^polls/$', poll_index, name='poll_index'),
-    url(r'^polls/(?P<question_id>\d+)/$', poll_detail, name='poll_detail'),
-    url(r'^polls/(?P<question_id>\d+)/vote/$', poll_vote, name='poll_vote'),
-    url(r'^polls/(?P<question_id>\d+)/result/$', poll_result, name='poll_result'),
+    url(r'^blog/', include('blog.urls',  namespace='blog')),
+     ### polls ###
+    url(r'^polls/', include('polls.urls', namespace='polls')),
 
 ]

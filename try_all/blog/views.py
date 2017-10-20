@@ -69,7 +69,7 @@ def post_add(request):
             else:
                 post.save()
             # post_detail.html로 가기 (url을 거쳐서)
-            return redirect('post_detail', post_id=post.pk)
+            return redirect('blog:post_detail', post_id=post.pk)
 
         # title이나 content를 기입하지 않았다면
         # 기입한 항목만 post_add.html에 전달하면서 이동
@@ -88,5 +88,5 @@ def post_delete(request, post_id):
     if request.method == 'POST':
         post = Post.objects.get(pk=post_id)
         post.delete()
-        return redirect('post_list')
+        return redirect('blog:post_list')
     return HttpResponse('삭제가 거부되었습니다.', status=403)
