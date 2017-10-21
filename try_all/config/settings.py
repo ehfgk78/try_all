@@ -30,6 +30,7 @@ settings_common_dict = json.loads(settings_common_json)
 SECRET_KEY = settings_common_dict["django"]["secret_key"]
 # 템플릿파일을 저장할 'templates'폴더
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 STATIC_URL = '/static/'
 # 정적파일을 저장할 'static'폴더
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
@@ -37,6 +38,10 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+# media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -62,6 +67,8 @@ INSTALLED_APPS = [
     # User applications
     'blog',
     'polls',
+    'models_doc',
+    'instagram',
 ]
 
 MIDDLEWARE = [

@@ -14,17 +14,29 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 
 from blog.views import post_list, post_detail, post_add, post_delete
+from config import settings
+from config.views import index
 from polls.views import poll_index, poll_detail, poll_vote, poll_result
 
 urlpatterns = [
     ### admin ###
     url(r'^admin/', admin.site.urls),
-     ### blog ###
-    url(r'^blog/', include('blog.urls',  namespace='blog')),
-     ### polls ###
+    url(r'^$', index),
+    ### blog ###
+    url(r'^blog/', include('blog.urls', namespace='blog')),
+    ### polls ###
     url(r'^polls/', include('polls.urls', namespace='polls')),
-
+    ### models_doc ###
+    url(r'^models/', include('models_doc.urls', namespace='models')),
+    ### instagram ###
+    url(r'^instagram/', include('instagram.urls', namespace='instagram')),
 ]
+
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT,
+)
